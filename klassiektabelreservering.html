@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function showReservations(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4){
+                    console.log(this.responseText)
+                    var allReservations = JSON.parse(this.responseText);
+                    var endString = "<table border=1>";
+                    for(var x = 0; x < allReservations.length; x++){
+                        endString += "<tr><td>"+allReservations[x].amount_people+"</td><td><button onclick = deleteR("+allReservations[x].id+")>delete</button></td></tr>";
+                    }
+                    endString += "</table>";
+                    document.getElementById("allReservationsTable").innerHTML = endString;
+                }
+            }
+            xhr.open("GET", "http://localhost:8082/reservations", true)
+            xhr.send();
+        }
+        function addR(){
+            var reservation = {};
+            reservation.amount_people = document.getElementById("amount_people").value;
+            var theJSON = JSON.stringify(reservation);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4){
+                    console.log("add succesful")
+                }
+            }
+            xhr.open("POST", "http://localhost:8082/addreservation", true)
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(theJSON);
+        }
+        function deleteR(theid){
+            console.log("I am deleting: " + theid);
+        }
+    </script>
+</head>
+<body>
+    <input id="amount_people">
+    <button onclick = "addR()">add</button>
+    <button onclick="showReservations()">Show all reservations</button>
+    <div id="allReservationsTable"></div>
+</body>
+</html>
