@@ -12,9 +12,9 @@
                 if(this.readyState == 4){
                     console.log(this.responseText)
                     var allReservations = JSON.parse(this.responseText);
-                    var endString = "<table border=1>";
+                    var endString = "<table border=1><thead><tr><th>ID</th><th>People</th><th>Room no.</th><th>Breakfast</th></tr></thead>";
                     for(var x = 0; x < allReservations.length; x++){
-                        endString += "<tr><td>"+allReservations[x].amount_people+"</td><td><button onclick = deleteR("+allReservations[x].id+")>delete</button></td></tr>";
+                        endString += "<tr><td>"+allReservations[x].id+"</td><td>"+allReservations[x].amountPeople+"</td><td>"+allReservations[x].roomNumber+"</td><td>"+allReservations[x].breakfast+"</td><td><button onclick = deleteR("+allReservations[x].id+")>delete</button></td></tr>";
                     }
                     endString += "</table>";
                     document.getElementById("allReservationsTable").innerHTML = endString;
@@ -25,7 +25,9 @@
         }
         function addR(){
             var reservation = {};
-            reservation.amount_people = document.getElementById("amount_people").value;
+            reservation.amountPeople = document.getElementById("amount_people").value;
+            reservation.roomNumber = document.getElementById("room_number").value;
+            reservation.breakfast = document.getElementById("breakfast").value;
             var theJSON = JSON.stringify(reservation);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function(){
@@ -37,15 +39,45 @@
             xhr.setRequestHeader("Content-Type","application/json");
             xhr.send(theJSON);
         }
+        function changeR(){
+            var reservation = {};
+            reservation.amountPeople = document.getElementById("amount_people").value;
+            reservation.roomNumber = document.getElementById("room_number").value;
+            reservation.breakfast = document.getElementById("breakfast").value;
+            reservation.id = document.getElementById("id").value;
+            var theJSON = JSON.stringify(reservation);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4){
+                    console.log("change succesful")
+                }
+            }
+            xhr.open("PUT", "http://localhost:8082/changereservation", true)
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(theJSON);
+        }
         function deleteR(theid){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4){
+                }
+            }
+            xhr.open("DELETE", "http://localhost:8082/deletereservation/"+theid, true)
+            xhr.send();
             console.log("I am deleting: " + theid);
         }
     </script>
 </head>
 <body>
-    <input id="amount_people">
-    <button onclick = "addR()">add</button>
+    Amount of people<br><input id="amount_people"><br>
+    Room No.<br><input id="room_number"><br>
+    Breakfast<br><select id="breakfast"><option value="false">false</option><option value="true">true</option></select><br><br>
+    <button onclick = "addR()">add</button><br><br>
+    <button onclick="changeR()">change reservation from id:</button>
+    <input id="id"><br><br>
     <button onclick="showReservations()">Show all reservations</button>
+    
+
     <div id="allReservationsTable"></div>
 </body>
 </html>

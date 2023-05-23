@@ -10,40 +10,35 @@ public class Reservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private int room_number;
+	private int roomNumber;
 	private boolean breakfast;
-	private int amount_people;
-
+	private int amountPeople;
+	
 	public long getId() {
 		return id;
 	}
-
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	public int getRoom_number() {
-		return room_number;
+	public int getRoomNumber() {
+		return roomNumber;
 	}
-
-	public void setRoom_number(int room_number) {
-		this.room_number = room_number;
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
 	}
-
 	public boolean isBreakfast() {
 		return breakfast;
 	}
-
 	public void setBreakfast(boolean breakfast) {
 		this.breakfast = breakfast;
 	}
-
-	public int getAmount_people() {
-		return amount_people;
+	public int getAmountPeople() {
+		return amountPeople;
+	}
+	public void setAmountPeople(int amountPeople) {
+		this.amountPeople = amountPeople;
 	}
 
-	public void setAmount_people(int amount_people) {
-		this.amount_people = amount_people;
-	}
+	
 
 }
