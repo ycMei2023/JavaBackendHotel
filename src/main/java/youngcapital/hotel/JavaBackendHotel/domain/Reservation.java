@@ -1,5 +1,7 @@
 package youngcapital.hotel.JavaBackendHotel.domain;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,9 +19,33 @@ public class Reservation {
 	private boolean paymentStatus;
 	private float price;
 	private float discount;
-	//private Date beginDate;
-	//private Date endDate;
-	//private Date approvalDate;
+	private LocalDate beginDate;
+	private LocalDate endDate;
+	private LocalDate approvalDate;
+
+	public LocalDate getBeginDate() {
+		return beginDate;
+	}
+
+	public void setBeginDate(LocalDate beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	public LocalDate getApprovalDate() {
+		return approvalDate;
+	}
+
+	public void setApprovalDate(LocalDate approvalDate) {
+		this.approvalDate = approvalDate;
+	}
 
 	public boolean isBusiness() {
 		return business;
