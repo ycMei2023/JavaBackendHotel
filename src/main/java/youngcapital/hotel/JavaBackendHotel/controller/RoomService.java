@@ -17,4 +17,9 @@ public class RoomService {
 	public void saveRoom(Room room) {
 		rr.save(room);
 	}
+
+	public void deleteRoom(long id) {
+		rr.deleteById(id);
+		
+	}
 }

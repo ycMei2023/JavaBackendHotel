@@ -15,10 +15,16 @@ public class Room {
 	private String type;
 	private double price;
 	private boolean reserved;
-	private String date_bookings;
-	private int room_no;
+	private String dateBookings;
+	private int roomNo;
 	
 	//Getters and Setters
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getType() {
 		return type;
 	}
@@ -37,18 +43,17 @@ public class Room {
 	public void setReserved(boolean reserved) {
 		this.reserved = reserved;
 	}
-	public String getDate_bookings() {
-		return date_bookings;
+	public String getDateBookings() {
+		return dateBookings;
 	}
-	public void setDate_bookings(String date_bookings) {
-		this.date_bookings = date_bookings;
+	public void setDateBookings(String dateBookings) {
+		this.dateBookings = dateBookings;
 	}
-	public int getRoom_no() {
-		return room_no;
+	public int getRoomNo() {
+		return roomNo;
 	}
-	public void setRoom_no(int room_no) {
-		this.room_no = room_no;
+	public void setRoomNo(int roomNo) {
+		this.roomNo = roomNo;
 	}
-	
-	
+
 }

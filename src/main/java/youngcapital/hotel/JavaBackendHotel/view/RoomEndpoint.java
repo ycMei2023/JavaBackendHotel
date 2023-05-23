@@ -1,6 +1,7 @@
 package youngcapital.hotel.JavaBackendHotel.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,5 +31,12 @@ public class RoomEndpoint {
 	public void addRoom(@RequestBody Room room) {
 		rs.saveRoom(room);
 		System.out.println("New room saved");
+	}
+	
+	@DeleteMapping("deleteRoom")
+	public void deleteRoom(@RequestBody String id) {
+		int intId = Integer.parseInt(id);
+		System.out.println("Received " + intId);
+		rs.deleteRoom(intId);
 	}
 }
