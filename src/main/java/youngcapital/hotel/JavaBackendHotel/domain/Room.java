@@ -1,5 +1,7 @@
 package youngcapital.hotel.JavaBackendHotel.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +14,8 @@ public class Room {
 	private long id;
 	
 	//Attributes of Room
-	private String type;
-	private double price;
+	private String type;;
+	private BigDecimal price;
 	private boolean reserved;
 	private String dateBookings;
 	private int roomNo;
@@ -31,10 +33,10 @@ public class Room {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	public boolean isReserved() {
@@ -54,6 +56,5 @@ public class Room {
 	}
 	public void setRoomNo(int roomNo) {
 		this.roomNo = roomNo;
-	}
-
+	}	
 }
