@@ -22,4 +22,9 @@ public class ReviewEndpoint {
     public void deleteReview(@PathVariable("reviewId") int reviewId){
         reviewService.deleteReview(reviewId);
     }
+
+    @PutMapping("/UpdateReview")
+    public void updateReview(@RequestBody Review review){
+        reviewService.saveReview(review);
+    }
 }
