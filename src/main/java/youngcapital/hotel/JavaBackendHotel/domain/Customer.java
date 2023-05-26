@@ -17,7 +17,7 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String adres;
+	private String address;
 	
 	public long getId() {
 		return id;
@@ -43,12 +43,13 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getAdres() {
-		return adres;
+	public String getAddress() {
+		return address;
 	}
-	public void setAdres(String adres) {
-		this.adres = adres;
+	public void setAddress(String address) {
+		this.address = address;
 	}
+	
 	
 	
 	
