@@ -16,25 +16,30 @@ import youngcapital.hotel.JavaBackendHotel.domain.Reservation;
 public class ReservationEndpoint {
 	@Autowired
 	ReservationService rr;
-	
+
 	@GetMapping("reservations")
 	public Iterable<Reservation> allReservations() {
 		return rr.giveAllReservations();
 	}
-	
+
 	@PostMapping("addreservation")
 	public void addReservation(@RequestBody Reservation reservation) {
 		rr.saveReservation(reservation);
 	}
-	
+
 	@PutMapping("changereservation")
 	public void changeReservation(@RequestBody Reservation reservation) {
 		rr.saveReservation(reservation);
 	}
-	
+
+	@PutMapping("approvereservation")
+	public void approveReservation(@RequestBody long reservationid) {
+		rr.approveReservation(reservationid);
+	}
+
 	@DeleteMapping("deletereservation/{reservationid}")
-	public void deleteReservation(@PathVariable("reservationid") int reservationid) {
+	public void deleteReservation(@PathVariable("reservationid") long reservationid) {
 		rr.deleteReservation(reservationid);
 	}
-	
+
 }
