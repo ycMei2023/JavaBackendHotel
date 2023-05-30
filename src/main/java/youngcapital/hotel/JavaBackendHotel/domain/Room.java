@@ -17,7 +17,6 @@ public class Room {
 	private String type;;
 	private BigDecimal price;
 	private boolean reserved;
-	private String dateBookings;
 	private int roomNo;
 	
 	//Getters and Setters
@@ -44,12 +43,6 @@ public class Room {
 	}
 	public void setReserved(boolean reserved) {
 		this.reserved = reserved;
-	}
-	public String getDateBookings() {
-		return dateBookings;
-	}
-	public void setDateBookings(String dateBookings) {
-		this.dateBookings = dateBookings;
 	}
 	public int getRoomNo() {
 		return roomNo;
