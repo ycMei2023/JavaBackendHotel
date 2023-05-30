@@ -21,11 +21,12 @@ public class ReservationService {
 		rr.save(reservation);
 	}
 
-	public void approveReservation(long reservationid) {
+	public void approveReservation(long reservationid, boolean paymentStatus) {
 		Optional<Reservation> optionalApprovedReservation = rr.findById(reservationid);
 		if (optionalApprovedReservation.isPresent()) {
 			Reservation approvedReservation = optionalApprovedReservation.get();
 			approvedReservation.setApprovalDate(LocalDate.now());
+			approvedReservation.setPaymentStatus(paymentStatus);
 			rr.save(approvedReservation);
 		}
 	}

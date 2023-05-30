@@ -32,9 +32,9 @@ public class ReservationEndpoint {
 		rr.saveReservation(reservation);
 	}
 
-	@PutMapping("approvereservation")
-	public void approveReservation(@RequestBody long reservationid) {
-		rr.approveReservation(reservationid);
+	@PutMapping("approvereservation/{paymentStatus}")
+	public void approveReservation(@RequestBody long reservationid, @PathVariable("paymentStatus") boolean paymentStatus) {
+		rr.approveReservation(reservationid, paymentStatus);
 	}
 
 	@DeleteMapping("deletereservation/{reservationid}")
