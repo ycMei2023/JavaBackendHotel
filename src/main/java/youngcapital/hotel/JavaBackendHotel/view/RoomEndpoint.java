@@ -31,13 +31,11 @@ public class RoomEndpoint {
 	@PostMapping("addRoom")
 	public void addRoom(@RequestBody Room room) {
 		rs.saveRoom(room);
-		System.out.println("New room saved");
 	}
 	
 	@DeleteMapping("deleteRoom")
 	public void deleteRoom(@RequestBody String id) {
 		int intId = Integer.parseInt(id);
-		System.out.println("Received " + intId);
 		rs.deleteRoom(intId);
 	}
 	
