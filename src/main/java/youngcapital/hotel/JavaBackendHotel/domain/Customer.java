@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Customer {
 	
@@ -22,6 +24,7 @@ public class Customer {
 	private String address;
 	
 	@OneToMany(mappedBy = "customer")
+	@JsonIgnore
 	private List<Reservation> reservations;
 	
 	public long getId() {

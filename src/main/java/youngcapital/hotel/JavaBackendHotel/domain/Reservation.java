@@ -24,7 +24,7 @@ public class Reservation {
 	private LocalDate endDate;
 	private LocalDate approvalDate;
 
-	@ManyToOne()
+	@ManyToOne(optional=false)
 	private Customer customer;
 	
 	public LocalDate getBeginDate() {
