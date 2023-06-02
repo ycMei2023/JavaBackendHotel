@@ -6,11 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Reservation {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private int roomNumber;
 	private int amountPeople;
@@ -23,6 +24,9 @@ public class Reservation {
 	private LocalDate endDate;
 	private LocalDate approvalDate;
 
+	@ManyToOne()
+	private Customer customer;
+	
 	public LocalDate getBeginDate() {
 		return beginDate;
 	}
@@ -111,4 +115,12 @@ public class Reservation {
 		this.amountPeople = amountPeople;
 	}
 
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+	
 }
