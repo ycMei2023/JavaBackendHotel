@@ -27,4 +27,9 @@ public class ReviewEndpoint {
     public void updateReview(@RequestBody Review review){
         reviewService.saveReview(review);
     }
+    
+    @PutMapping("/ApproveReview")
+    public void approveReview(@RequestBody long reviewId) {
+    	reviewService.approveReview(reviewId);
+    }
 }
