@@ -19,6 +19,7 @@ public class Room {
 	private boolean reserved;
 	private int roomNo;
 	
+	
 	//Getters and Setters
 	public long getId() {
 		return id;
@@ -49,5 +50,6 @@ public class Room {
 	}
 	public void setRoomNo(int roomNo) {
 		this.roomNo = roomNo;
-	}	
+	}
+
 }

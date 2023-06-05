@@ -1,12 +1,15 @@
 package youngcapital.hotel.JavaBackendHotel.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Reservation {
@@ -23,6 +26,9 @@ public class Reservation {
 	private LocalDate beginDate;
 	private LocalDate endDate;
 	private LocalDate approvalDate;
+	
+	@ManyToMany(cascade = {CascadeType.ALL}) //in Room is a list named reservations
+	private List<Room> rooms;
 
 	@ManyToOne(optional=false)
 	private Customer customer;
@@ -123,4 +129,10 @@ public class Reservation {
 		return customer;
 	}
 	
+	public void setRooms(List<Room> rooms) {
+		this.rooms = rooms;
+	}
+	public List<Room> getRooms() {
+		return rooms;
+	}
 }

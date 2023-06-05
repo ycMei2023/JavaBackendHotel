@@ -1,7 +1,5 @@
 package youngcapital.hotel.JavaBackendHotel.domain;
 
-
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,10 +9,11 @@ import javax.persistence.Id;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private  int rating;
     private String name, reviewText;
+    private boolean approved = false;
 
     public long getId() {
         return id;
@@ -49,5 +48,13 @@ public class Review {
     }
 
     public Review() {
+    }
+    
+    public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+    
+    public boolean getApproved() {
+    	return approved;
     }
 }
