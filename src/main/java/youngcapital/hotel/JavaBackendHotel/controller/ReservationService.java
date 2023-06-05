@@ -29,13 +29,6 @@ public class ReservationService {
 	}
 
 	public void saveReservation(Reservation reservation) {
-
-		//Part of the below code is to create links to Room in Reservation
-		
-		//Room r = reservation.getRooms().get(0);
-		//Optional<Room> optional = roomRepository.findById(r.getId());
-		//reservation.setRooms(List.of(optional.get()));
-
 		rr.save(reservation);
 	}
 
@@ -49,16 +42,25 @@ public class ReservationService {
 		}
 	}
 	
-	public long linkReservationCustomer(Customer customer, Reservation reservation) {
+	public long linkReservationCustomer(Customer customer, Reservation reservation, long roomId) {
+		// Create and set customer
 		cr.save(customer);
 		reservation.setCustomer(customer);
+		
+		// Link room (must be an existing room with valid id)
+		Optional<Room> optionalRoom = roomRepository.findById(roomId);
+		if (optionalRoom.isPresent()) {
+			reservation.setRooms(List.of(optionalRoom.get()));
+		} else {
+			System.out.println("Error! Invalid room id in reservation request.");
+		}
+				
 		rr.save(reservation);
 		
 		return reservation.getId();
 	}
 
 	public Iterable<Reservation> getReservationsByDate(){
-		System.out.println(rr.reservations());
 		return(rr.reservations());
 	}
 

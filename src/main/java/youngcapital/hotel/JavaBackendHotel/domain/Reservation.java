@@ -27,8 +27,10 @@ public class Reservation {
 	private LocalDate endDate;
 	private LocalDate approvalDate;
 	
-	@ManyToMany(cascade = {CascadeType.ALL}) //in Room is a list named reservations
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //in Room is a list named reservations
 	private List<Room> rooms;
+	// Do not set to CascadeType.All, or it will delete rooms along with the reservation
+	// when a reservation is deleted.
 
 	@ManyToOne(optional=false)
 	private Customer customer;

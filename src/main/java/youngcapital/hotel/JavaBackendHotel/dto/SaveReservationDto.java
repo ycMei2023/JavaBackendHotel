@@ -16,6 +16,8 @@ public class SaveReservationDto {
 	private String firstName;
 	private String lastName;
 	
+	private long roomId;
+	
 	public boolean isBreakfast() {
 		return breakfast;
 	}
@@ -75,6 +77,12 @@ public class SaveReservationDto {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	public long getRoomId() {
+		return roomId;
+	}
+	public void setRoomId(long roomId) {
+		this.roomId = roomId;
 	}
 	
 }

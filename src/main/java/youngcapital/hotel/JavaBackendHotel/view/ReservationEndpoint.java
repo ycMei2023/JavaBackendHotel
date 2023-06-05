@@ -37,13 +37,18 @@ public class ReservationEndpoint {
 		reservation.setEndDate(saveReservationDto.getEndDate());
 		reservation.setBreakfast(saveReservationDto.isBreakfast());
 		reservation.setBusiness(saveReservationDto.isBusiness());
-		return rr.linkReservationCustomer(customer, reservation);
+		
+		long roomId = saveReservationDto.getRoomId();
+		
+		return rr.linkReservationCustomer(customer, reservation, roomId);
 		//reservation.setPaymentStatus(saveReservationDto.isPaymentStatus());
 	}
 	@PutMapping("changereservation")
 	public void changeReservation(@RequestBody Reservation reservation) {
 		rr.saveReservation(reservation);
 	}
+	
+	// To-do: nieuwe PutMapping voor "changeLinkedReservation" + rest back-end
 
 	@PutMapping("approvereservation/{paymentStatus}")
 	public void approveReservation(@RequestBody long reservationid, @PathVariable("paymentStatus") boolean paymentStatus) {
