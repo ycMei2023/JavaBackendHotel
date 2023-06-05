@@ -21,7 +21,7 @@ public class RoomEndpoint {
 	RoomService rs;
 	
 	@GetMapping("/room/{id}")
-	public Optional<Room> sendRoom(@PathVariable long id) {
+	public Optional<Room> getRoom(@PathVariable long id) {
 		return rs.findById(id);
 	}
 	
