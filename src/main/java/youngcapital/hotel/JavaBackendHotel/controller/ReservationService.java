@@ -22,9 +22,11 @@ public class ReservationService {
 	}
 
 	public void saveReservation(Reservation reservation) {
-		Room r = reservation.getRooms().get(0);
-		Optional<Room> optional = roomRepository.findById(r.getId());
-		reservation.setRooms(List.of(optional.get()));
+		//Part of the below code is to create links to Room in Reservation
+		
+		//Room r = reservation.getRooms().get(0);
+		//Optional<Room> optional = roomRepository.findById(r.getId());
+		//reservation.setRooms(List.of(optional.get()));
 		rr.save(reservation);
 	}
 
