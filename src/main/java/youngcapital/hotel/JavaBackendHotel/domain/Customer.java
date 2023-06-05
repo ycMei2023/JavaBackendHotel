@@ -1,11 +1,15 @@
 package youngcapital.hotel.JavaBackendHotel.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Customer {
@@ -18,6 +22,10 @@ public class Customer {
 	private String lastName;
 	private String email;
 	private String address;
+	
+	@OneToMany(mappedBy = "customer")
+	@JsonIgnore
+	private List<Reservation> reservations;
 	
 	public long getId() {
 		return id;
@@ -49,8 +57,12 @@ public class Customer {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
 	
 	
 	
