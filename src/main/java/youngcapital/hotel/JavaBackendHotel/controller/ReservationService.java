@@ -28,9 +28,9 @@ public class ReservationService {
 	}
 
 	public void saveReservation(Reservation reservation) {
-		Room r = reservation.getRooms().get(0);
-		Optional<Room> optional = roomRepository.findById(r.getId());
-		reservation.setRooms(Arrays.asList(optional.get()) );
+		//Room r = reservation.getRooms().get(0);
+		//Optional<Room> optional = roomRepository.findById(r.getId());
+		//reservation.setRooms(Arrays.asList(optional.get()) );
 		rr.save(reservation);
 	}
 
