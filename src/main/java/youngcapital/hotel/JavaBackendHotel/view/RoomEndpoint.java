@@ -1,8 +1,11 @@
 package youngcapital.hotel.JavaBackendHotel.view;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +20,10 @@ public class RoomEndpoint {
 	@Autowired
 	RoomService rs;
 	
-	/* A simple example
-	@GetMapping("/room")
-	public Room sendRoom() {
-		return new Room();
-	} */
+	@GetMapping("/room/{id}")
+	public Optional<Room> sendRoom(@PathVariable long id) {
+		return rs.findById(id);
+	}
 	
 	@GetMapping("allRooms")
 	public Iterable<Room> allRooms() {
@@ -39,8 +41,16 @@ public class RoomEndpoint {
 		rs.deleteRoom(intId);
 	}
 	
-	@PutMapping("updateRoom")
-	public void updateRoom(@RequestBody Room room) {
-		rs.saveRoom(room);
+	@PutMapping("updateRoom/{id}")
+	public void updateRoom(@RequestBody Room room, @PathVariable long id) {
+		Optional<Room> roomOptional = rs.findById(id);
+		
+		if (roomOptional.isEmpty())
+			return;
+		
+		Room dbRoom = roomOptional.get();
+		dbRoom.setRoomNo(room.getRoomNo());
+		
+		rs.saveRoom(dbRoom);
 	}
 }
