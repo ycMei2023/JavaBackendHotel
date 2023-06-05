@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -29,6 +30,9 @@ public class Reservation {
 	@ManyToMany(cascade = {CascadeType.ALL}) //in Room is a list named reservations
 	private List<Room> rooms;
 
+	@ManyToOne(optional=false)
+	private Customer customer;
+	
 	public LocalDate getBeginDate() {
 		return beginDate;
 	}
@@ -116,6 +120,15 @@ public class Reservation {
 	public void setAmountPeople(int amountPeople) {
 		this.amountPeople = amountPeople;
 	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+	
 	public void setRooms(List<Room> rooms) {
 		this.rooms = rooms;
 	}
