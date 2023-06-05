@@ -1,14 +1,7 @@
 package youngcapital.hotel.JavaBackendHotel.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import youngcapital.hotel.JavaBackendHotel.controller.ReservationService;
 import youngcapital.hotel.JavaBackendHotel.domain.Customer;
 import youngcapital.hotel.JavaBackendHotel.domain.Reservation;
@@ -23,6 +16,9 @@ public class ReservationEndpoint {
 	public Iterable<Reservation> allReservations() {
 		return rr.giveAllReservations();
 	}
+
+	@GetMapping("reservationsByDate")
+	public Iterable<Reservation> reservationsByDate(){return rr.getReservationsByDate();}
 
 	@PostMapping("addreservation")
 	public void addReservation(@RequestBody Reservation reservation) {
