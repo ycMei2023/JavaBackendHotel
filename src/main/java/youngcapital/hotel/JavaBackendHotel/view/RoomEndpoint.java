@@ -50,6 +50,9 @@ public class RoomEndpoint {
 		
 		Room dbRoom = roomOptional.get();
 		dbRoom.setRoomNo(room.getRoomNo());
+		dbRoom.setReserved(room.isReserved());
+		dbRoom.setType(room.getType());
+		dbRoom.setPrice(room.getPrice());
 		
 		rs.saveRoom(dbRoom);
 	}
