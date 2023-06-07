@@ -40,7 +40,7 @@ public class ReservationEndpoint {
 		
 		long roomId = saveReservationDto.getRoomId();
 		
-		return rr.linkReservationCustomer(customer, reservation, roomId);
+		return rr.saveReservationCustomerRoom(customer, reservation, roomId);
 		//reservation.setPaymentStatus(saveReservationDto.isPaymentStatus());
 	}
 	@PutMapping("changereservation")
@@ -64,7 +64,7 @@ public class ReservationEndpoint {
 		
 		long roomId = saveReservationDto.getRoomId();
 		
-		rr.updateReservationCustomer(customer, reservation, roomId);
+		rr.saveReservationCustomerRoom(customer, reservation, roomId);
 	}
 	
 

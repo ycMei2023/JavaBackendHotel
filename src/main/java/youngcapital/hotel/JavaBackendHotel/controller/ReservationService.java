@@ -42,6 +42,8 @@ public class ReservationService {
 		}
 	}
 	
+	/* - no longer needed with saveReservationCustomerRoom (below)
+	 * 
 	public long linkReservationCustomer(Customer customer, Reservation reservation, long roomId) {
 		// Create and set customer
 		cr.save(customer);
@@ -58,20 +60,26 @@ public class ReservationService {
 		rr.save(reservation);
 		
 		return reservation.getId();
-	}
+	} 
+	 *
+	 */
 	
-	public long updateReservationCustomer(Customer customer, Reservation newReservation, long roomId) {
-		// Retrieve the customer originally linked to the reservation
-		// The ID of the old and new reservation are identical, because this is an update
-		long reservationId = newReservation.getId();
-		Reservation oldReservation = rr.findById(reservationId).get();
-		long oldCustomerId = oldReservation.getCustomer().getId();
+	public long saveReservationCustomerRoom(Customer customer, Reservation newReservation, long roomId) {	
+		// If this reservation is a new addition, the reservationId will be 0 at this point (it hasn't been set)
+		// If this is an update, the reservationId will not be 0, indicating which entry needs to be updated
+		// In the case of an update, the originally linked customer id needs to be retrieved
 		
-		// Set customer ID to the new customer.
-		// This will cause 'save' to update instead of create a new customer.
-		customer.setId(oldCustomerId);
-		cr.save(customer);
-		newReservation.setCustomer(customer);
+		long reservationId = newReservation.getId();
+		if (reservationId != 0) {
+			// Indicates newReservation is an update
+			// Retrieve the customer originally linked to the reservation
+			Reservation oldReservation = rr.findById(reservationId).get();
+			long oldCustomerId = oldReservation.getCustomer().getId();
+			customer.setId(oldCustomerId);			
+		}
+		
+		cr.save(customer); // Creates a new customer in database if no id has been set yet, or updates the set id
+		newReservation.setCustomer(customer); // Link customer to reservation
 		
 		// Link room (must be an existing room with valid id)
 		Optional<Room> optionalRoom = roomRepository.findById(roomId);
