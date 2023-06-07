@@ -25,7 +25,7 @@ public class ReservationEndpoint {
 		rr.saveReservation(reservation);
 	}
 	
-	@PostMapping("addlinkedreservation")
+	@PostMapping("addLinkedReservation")
 	public long addReservation(@RequestBody SaveReservationDto saveReservationDto) {
 		Customer customer = new Customer();
 		customer.setFirstName(saveReservationDto.getFirstName());
@@ -48,7 +48,25 @@ public class ReservationEndpoint {
 		rr.saveReservation(reservation);
 	}
 	
-	// To-do: nieuwe PutMapping voor "changeLinkedReservation" + rest back-end
+	@PutMapping("changeLinkedReservation")
+	public void changeReservation(@RequestBody SaveReservationDto saveReservationDto) {
+		Customer customer = new Customer();
+		customer.setFirstName(saveReservationDto.getFirstName());
+		customer.setLastName(saveReservationDto.getLastName());
+		
+		Reservation reservation = new Reservation();
+		reservation.setAmountPeople(saveReservationDto.getAmountPeople());
+		reservation.setBeginDate(saveReservationDto.getBeginDate());
+		reservation.setEndDate(saveReservationDto.getEndDate());
+		reservation.setBreakfast(saveReservationDto.isBreakfast());
+		reservation.setBusiness(saveReservationDto.isBusiness());
+		reservation.setId(saveReservationDto.getReservationId());
+		
+		long roomId = saveReservationDto.getRoomId();
+		
+		rr.updateReservationCustomer(customer, reservation, roomId);
+	}
+	
 
 	@PutMapping("approvereservation/{paymentStatus}")
 	public void approveReservation(@RequestBody long reservationid, @PathVariable("paymentStatus") boolean paymentStatus) {

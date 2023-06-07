@@ -18,6 +18,8 @@ public class SaveReservationDto {
 	
 	private long roomId;
 	
+	private long reservationId;
+	
 	public boolean isBreakfast() {
 		return breakfast;
 	}
@@ -83,6 +85,12 @@ public class SaveReservationDto {
 	}
 	public void setRoomId(long roomId) {
 		this.roomId = roomId;
+	}
+	public long getReservationId() {
+		return reservationId;
+	}
+	public void setReservationId(long reservationId) {
+		this.reservationId = reservationId;
 	}
 	
 }

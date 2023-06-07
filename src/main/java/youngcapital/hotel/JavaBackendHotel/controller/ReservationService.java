@@ -59,6 +59,33 @@ public class ReservationService {
 		
 		return reservation.getId();
 	}
+	
+	public long updateReservationCustomer(Customer customer, Reservation newReservation, long roomId) {
+		// Retrieve the customer originally linked to the reservation
+		// The ID of the old and new reservation are identical, because this is an update
+		long reservationId = newReservation.getId();
+		Reservation oldReservation = rr.findById(reservationId).get();
+		long oldCustomerId = oldReservation.getCustomer().getId();
+		
+		// Set customer ID to the new customer.
+		// This will cause 'save' to update instead of create a new customer.
+		customer.setId(oldCustomerId);
+		cr.save(customer);
+		newReservation.setCustomer(customer);
+		
+		// Link room (must be an existing room with valid id)
+		Optional<Room> optionalRoom = roomRepository.findById(roomId);
+		if (optionalRoom.isPresent()) {
+			newReservation.setRooms(List.of(optionalRoom.get()));
+		} else {
+			System.out.println("Error! Invalid room id in reservation request.");
+		}
+				
+		rr.save(newReservation);
+		
+		return newReservation.getId();
+		
+	}
 
 	public Iterable<Reservation> getReservationsByDate(){
 		return(rr.reservations());
