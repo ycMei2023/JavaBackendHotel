@@ -14,6 +14,10 @@ public class ReviewEndpoint {
     public Iterable<Review> allReviews(){
         return reviewService.returnAllReviews();
     }
+    @GetMapping("/ApprovedReviews")
+    public Iterable<Review> approvedReviews(){
+    	return reviewService.returnApprovedReviews();
+    }
     @PostMapping("/AddReview")
     public void addReview(@RequestBody Review review){
         reviewService.saveReview(review);
