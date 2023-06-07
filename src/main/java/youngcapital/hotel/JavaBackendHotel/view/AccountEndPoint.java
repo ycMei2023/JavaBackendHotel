@@ -21,4 +21,10 @@ public class AccountEndPoint {
     public void addAccount(@RequestBody Account account){
         accountService.saveAccount(account);
     }
+
+    @PostMapping("login")
+    public boolean CheckPassword(@RequestBody Account account){
+        Account user =  accountService.getAccount(account.getEmail()).iterator().next();
+        return user.checkPassword(account.getPassword());
+    }
 }
