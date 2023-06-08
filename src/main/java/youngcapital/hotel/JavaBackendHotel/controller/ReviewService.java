@@ -18,6 +18,11 @@ public class ReviewService {
     public Iterable<Review> returnAllReviews(){
         return reviewRepository.findAll();
     }
+    
+    public Iterable<Review> returnApprovedReviews(){
+    	System.out.println(reviewRepository.approvedReviews());
+    	return reviewRepository.approvedReviews();
+    }
 
     public void saveReview(Review review) {
         reviewRepository.save(review);
