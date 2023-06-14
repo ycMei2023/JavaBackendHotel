@@ -16,4 +16,8 @@ public class AccountService {
         account.encrypt();
         accountRepository.save(account);
     }
+
+    public Iterable<Account>getAccount(String email){
+       return accountRepository.account(email);
+    }
 }

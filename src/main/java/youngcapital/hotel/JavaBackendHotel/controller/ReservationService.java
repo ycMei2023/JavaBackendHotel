@@ -29,13 +29,6 @@ public class ReservationService {
 	}
 
 	public void saveReservation(Reservation reservation) {
-
-		//Part of the below code is to create links to Room in Reservation
-		
-		//Room r = reservation.getRooms().get(0);
-		//Optional<Room> optional = roomRepository.findById(r.getId());
-		//reservation.setRooms(List.of(optional.get()));
-
 		rr.save(reservation);
 	}
 
@@ -49,16 +42,60 @@ public class ReservationService {
 		}
 	}
 	
-	public long linkReservationCustomer(Customer customer, Reservation reservation) {
+	/* - no longer needed with saveReservationCustomerRoom (below)
+	 * 
+	public long linkReservationCustomer(Customer customer, Reservation reservation, long roomId) {
+		// Create and set customer
 		cr.save(customer);
 		reservation.setCustomer(customer);
+		
+		// Link room (must be an existing room with valid id)
+		Optional<Room> optionalRoom = roomRepository.findById(roomId);
+		if (optionalRoom.isPresent()) {
+			reservation.setRooms(List.of(optionalRoom.get()));
+		} else {
+			System.out.println("Error! Invalid room id in reservation request.");
+		}
+				
 		rr.save(reservation);
 		
 		return reservation.getId();
+	} 
+	 *
+	 */
+	
+	public long saveReservationCustomerRoom(Customer customer, Reservation newReservation, long roomId) {	
+		// If this reservation is a new addition, the reservationId will be 0 at this point (it hasn't been set)
+		// If this is an update, the reservationId will not be 0, indicating which entry needs to be updated
+		// In the case of an update, the originally linked customer id needs to be retrieved
+		
+		long reservationId = newReservation.getId();
+		if (reservationId != 0) {
+			// Indicates newReservation is an update
+			// Retrieve the customer originally linked to the reservation
+			Reservation oldReservation = rr.findById(reservationId).get();
+			long oldCustomerId = oldReservation.getCustomer().getId();
+			customer.setId(oldCustomerId);			
+		}
+		
+		cr.save(customer); // Creates a new customer in database if no id has been set yet, or updates the set id
+		newReservation.setCustomer(customer); // Link customer to reservation
+		
+		// Link room (must be an existing room with valid id)
+		Optional<Room> optionalRoom = roomRepository.findById(roomId);
+		if (optionalRoom.isPresent()) {
+			newReservation.setRooms(List.of(optionalRoom.get()));
+		} else {
+			System.out.println("Error! Invalid room id in reservation request.");
+		}
+				
+		rr.save(newReservation);
+		
+		return newReservation.getId();
+		
 	}
 
 	public Iterable<Reservation> getReservationsByDate(){
-		System.out.println(rr.reservations());
 		return(rr.reservations());
 	}
 

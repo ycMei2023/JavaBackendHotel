@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import youngcapital.hotel.JavaBackendHotel.controller.RoomService;
+import youngcapital.hotel.JavaBackendHotel.domain.Reservation;
 import youngcapital.hotel.JavaBackendHotel.domain.Room;
 
 @RestController
@@ -55,5 +56,10 @@ public class RoomEndpoint {
 		dbRoom.setPrice(room.getPrice());
 		
 		rs.saveRoom(dbRoom);
+	}
+	
+	@GetMapping("reservedRooms")
+	public Iterable<Room> reservedRooms(){
+		return rs.getReservedRooms();
 	}
 }

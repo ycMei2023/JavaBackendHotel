@@ -25,7 +25,7 @@ public class ReservationEndpoint {
 		rr.saveReservation(reservation);
 	}
 	
-	@PostMapping("addlinkedreservation")
+	@PostMapping("addLinkedReservation")
 	public long addReservation(@RequestBody SaveReservationDto saveReservationDto) {
 		Customer customer = new Customer();
 		customer.setFirstName(saveReservationDto.getFirstName());
@@ -37,13 +37,36 @@ public class ReservationEndpoint {
 		reservation.setEndDate(saveReservationDto.getEndDate());
 		reservation.setBreakfast(saveReservationDto.isBreakfast());
 		reservation.setBusiness(saveReservationDto.isBusiness());
-		return rr.linkReservationCustomer(customer, reservation);
+		
+		long roomId = saveReservationDto.getRoomId();
+		
+		return rr.saveReservationCustomerRoom(customer, reservation, roomId);
 		//reservation.setPaymentStatus(saveReservationDto.isPaymentStatus());
 	}
 	@PutMapping("changereservation")
 	public void changeReservation(@RequestBody Reservation reservation) {
 		rr.saveReservation(reservation);
 	}
+	
+	@PutMapping("changeLinkedReservation")
+	public void changeReservation(@RequestBody SaveReservationDto saveReservationDto) {
+		Customer customer = new Customer();
+		customer.setFirstName(saveReservationDto.getFirstName());
+		customer.setLastName(saveReservationDto.getLastName());
+		
+		Reservation reservation = new Reservation();
+		reservation.setAmountPeople(saveReservationDto.getAmountPeople());
+		reservation.setBeginDate(saveReservationDto.getBeginDate());
+		reservation.setEndDate(saveReservationDto.getEndDate());
+		reservation.setBreakfast(saveReservationDto.isBreakfast());
+		reservation.setBusiness(saveReservationDto.isBusiness());
+		reservation.setId(saveReservationDto.getReservationId());
+		
+		long roomId = saveReservationDto.getRoomId();
+		
+		rr.saveReservationCustomerRoom(customer, reservation, roomId);
+	}
+	
 
 	@PutMapping("approvereservation/{paymentStatus}")
 	public void approveReservation(@RequestBody long reservationid, @PathVariable("paymentStatus") boolean paymentStatus) {

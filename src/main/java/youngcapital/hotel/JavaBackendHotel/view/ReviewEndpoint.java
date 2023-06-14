@@ -1,5 +1,7 @@
 package youngcapital.hotel.JavaBackendHotel.view;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import youngcapital.hotel.JavaBackendHotel.controller.ReviewService;
@@ -35,5 +37,10 @@ public class ReviewEndpoint {
     @PutMapping("/ApproveReview")
     public void approveReview(@RequestBody long reviewId) {
     	reviewService.approveReview(reviewId);
+    }
+    
+    @GetMapping("/RandomReviews/{numberOfRev}")
+    public Iterable<Review> randomReviews(@PathVariable("numberOfRev") int numberOfRev){
+    	return reviewService.randomReviews(numberOfRev);
     }
 }

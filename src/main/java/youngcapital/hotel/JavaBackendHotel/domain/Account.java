@@ -63,4 +63,9 @@ public class Account {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+
+    public boolean checkPassword(String password) {
+        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(),this.password);
+        return result.verified;
+    }
 }
