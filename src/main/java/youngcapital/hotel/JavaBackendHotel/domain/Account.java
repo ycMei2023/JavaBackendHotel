@@ -19,6 +19,16 @@ public class Account {
     private int points;
     private LocalDate birthDate;
 
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
+    private int userType;
+
     public void encrypt(){
         this.password = BCrypt.withDefaults().hashToString(14, this.password.toCharArray());
         System.out.println(this.password);

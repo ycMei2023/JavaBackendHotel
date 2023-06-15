@@ -23,8 +23,11 @@ public class AccountEndPoint {
     }
 
     @PostMapping("login")
-    public boolean CheckPassword(@RequestBody Account account){
+    public Account CheckPassword(@RequestBody Account account){
         Account user =  accountService.getAccount(account.getEmail()).iterator().next();
-        return user.checkPassword(account.getPassword());
+        if(user.checkPassword(account.getPassword())){
+            return user;
+        }
+        else{ return new Account();}
     }
 }
