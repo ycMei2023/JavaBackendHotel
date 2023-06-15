@@ -20,7 +20,6 @@ public class ReviewService {
     }
     
     public Iterable<Review> returnApprovedReviews(){
-    	System.out.println(reviewRepository.approvedReviews());
     	return reviewRepository.approvedReviews();
     }
 

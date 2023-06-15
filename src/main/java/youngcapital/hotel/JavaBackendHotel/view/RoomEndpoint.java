@@ -1,5 +1,6 @@
 package youngcapital.hotel.JavaBackendHotel.view;
 
+import java.time.LocalData;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,11 @@ public class RoomEndpoint {
 	@GetMapping("reservedRooms")
 	public Iterable<Room> reservedRooms(){
 		return rs.getReservedRooms();
+	}
+	
+	@GetMapping("vacantRooms/{strCheckInDate}/{strCheckOutDate}")
+	public Iterable<Room> vacantRooms(@PathVariable String strCheckInDate, @PathVariable String strCheckOutDate) {	
+		return rs.vacantRooms(strCheckInDate, strCheckOutDate);
+
 	}
 }
