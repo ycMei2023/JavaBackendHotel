@@ -1,6 +1,6 @@
 package youngcapital.hotel.JavaBackendHotel.view;
 
-import java.time.LocalData;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
