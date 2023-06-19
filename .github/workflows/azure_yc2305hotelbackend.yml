@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'yc2305hotelbackend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0A3ACD3F68924B54A8E438E6F8240FB8 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B4404635C8E4416A9453C5E0555726BA }}
           package: '*.jar'
