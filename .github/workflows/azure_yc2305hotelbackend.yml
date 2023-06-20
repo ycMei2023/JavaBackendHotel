@@ -29,6 +29,9 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
+      - name: Set Secrets
+          env:
+            MY_SECRET_DATABASE_URL: ${{ secrets.MY_SECRET_DATABASE_URL }}
 
   deploy:
     runs-on: ubuntu-latest
