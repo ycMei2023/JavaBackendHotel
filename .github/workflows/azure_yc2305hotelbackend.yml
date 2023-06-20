@@ -21,8 +21,8 @@ jobs:
         with:
           java-version: '17'
 
-      - name: Set environment variable
-        run: echo 'MY_SECRET_DATABASE_URL=${{ secrets.MY_SECRET_DATABASE_URL }}' >> $GITHUB_ENV
+      #- name: Set environment variable
+      #  run: echo 'MY_SECRET_DATABASE_URL=${{ secrets.MY_SECRET_DATABASE_URL }}' >> $GITHUB_ENV
 
       - name: Build with Maven
         run: mvn clean install
