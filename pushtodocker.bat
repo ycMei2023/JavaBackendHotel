@@ -1,0 +1,1 @@
+docker push crawlycrawl/javahotelbackend:latest
