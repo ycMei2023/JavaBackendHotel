@@ -2,6 +2,7 @@ package youngcapital.hotel.JavaBackendHotel.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import youngcapital.hotel.JavaBackendHotel.controller.CustomerService;
 import youngcapital.hotel.JavaBackendHotel.controller.ReservationService;
 import youngcapital.hotel.JavaBackendHotel.domain.Customer;
 import youngcapital.hotel.JavaBackendHotel.domain.Reservation;
@@ -11,6 +12,8 @@ import youngcapital.hotel.JavaBackendHotel.dto.SaveReservationDto;
 public class ReservationEndpoint {
 	@Autowired
 	ReservationService rr;
+	@Autowired
+	CustomerService customerService;
 
 	@GetMapping("reservations")
 	public Iterable<Reservation> allReservations() {
@@ -24,13 +27,25 @@ public class ReservationEndpoint {
 	public void addReservation(@RequestBody Reservation reservation) {
 		rr.saveReservation(reservation);
 	}
-	
+
 	@PostMapping("addLinkedReservation")
 	public long addReservation(@RequestBody SaveReservationDto saveReservationDto) {
-		Customer customer = new Customer();
-		customer.setFirstName(saveReservationDto.getFirstName());
-		customer.setLastName(saveReservationDto.getLastName());
-		
+		Customer customer;
+		if (saveReservationDto.getCustomerId() != 0){
+			customer = customerService.getById(saveReservationDto.getCustomerId());
+			if (customer.getFirstName() == null) {
+				customer.setFirstName(saveReservationDto.getFirstName());
+			}
+			if (customer.getLastName() == null) {
+				customer.setLastName(saveReservationDto.getLastName());
+			}
+		}else {
+			System.out.println(saveReservationDto.getCustomerId());
+			customer = new Customer();
+			customer.setFirstName(saveReservationDto.getFirstName());
+			customer.setLastName(saveReservationDto.getLastName());
+		}
+
 		Reservation reservation = new Reservation();
 		reservation.setAmountPeople(saveReservationDto.getAmountPeople());
 		reservation.setBeginDate(saveReservationDto.getBeginDate());
@@ -38,23 +53,24 @@ public class ReservationEndpoint {
 		reservation.setBreakfast(saveReservationDto.isBreakfast());
 		reservation.setBusiness(saveReservationDto.isBusiness());
 		reservation.setPrice(saveReservationDto.getPrice());
-		
+
 		long roomId = saveReservationDto.getRoomId();
-		
+
 		return rr.saveReservationCustomerRoom(customer, reservation, roomId);
 		//reservation.setPaymentStatus(saveReservationDto.isPaymentStatus());
 	}
+
 	@PutMapping("changereservation")
 	public void changeReservation(@RequestBody Reservation reservation) {
 		rr.saveReservation(reservation);
 	}
-	
+
 	@PutMapping("changeLinkedReservation")
 	public void changeReservation(@RequestBody SaveReservationDto saveReservationDto) {
 		Customer customer = new Customer();
 		customer.setFirstName(saveReservationDto.getFirstName());
 		customer.setLastName(saveReservationDto.getLastName());
-		
+
 		Reservation reservation = new Reservation();
 		reservation.setAmountPeople(saveReservationDto.getAmountPeople());
 		reservation.setBeginDate(saveReservationDto.getBeginDate());
@@ -62,12 +78,12 @@ public class ReservationEndpoint {
 		reservation.setBreakfast(saveReservationDto.isBreakfast());
 		reservation.setBusiness(saveReservationDto.isBusiness());
 		reservation.setId(saveReservationDto.getReservationId());
-		
+
 		long roomId = saveReservationDto.getRoomId();
-		
+
 		rr.saveReservationCustomerRoom(customer, reservation, roomId);
 	}
-	
+
 
 	@PutMapping("approvereservation/{paymentStatus}")
 	public void approveReservation(@RequestBody long reservationid, @PathVariable("paymentStatus") boolean paymentStatus) {
