@@ -37,6 +37,7 @@ public class ReservationEndpoint {
 		reservation.setEndDate(saveReservationDto.getEndDate());
 		reservation.setBreakfast(saveReservationDto.isBreakfast());
 		reservation.setBusiness(saveReservationDto.isBusiness());
+		reservation.setPrice(saveReservationDto.getPrice());
 		
 		long roomId = saveReservationDto.getRoomId();
 		
