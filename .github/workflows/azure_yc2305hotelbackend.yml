@@ -24,7 +24,7 @@ jobs:
       - name: Set environment variable
         run:  echo 'MY_SECRET_DATABASE_URL=${{ secrets.MY_SECRET_DATABASE_URL }}' >> $GITHUB_ENV;
               echo 'MY_SECRET_USER=${{ secrets.MY_SECRET_USER }}' >> $GITHUB_ENV;
-              echo 'MY_SECRET_PASSWORD=${{ secrets.MY_SECRET_PASSWORD }}' >> $GITHUB_ENV; 
+              echo 'MY_SECRET_PASSWORD=${{ secrets.MY_SECRET_PASSWORD }}' >> $GITHUB_ENV;
 
       - name: Build with Maven
         run: mvn clean install
