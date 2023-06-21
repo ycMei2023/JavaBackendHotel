@@ -12,4 +12,6 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
     @Query(value = "SELECT * FROM Reservation ORDER BY begin_date ASC", nativeQuery = true)
     List<Reservation> reservations();
 
+    @Query(value = "SELECT * FROM Reservation WHERE customer_id = ?1", nativeQuery = true)
+    Iterable<Reservation> getByAccount(Long CustomerId);
 }
