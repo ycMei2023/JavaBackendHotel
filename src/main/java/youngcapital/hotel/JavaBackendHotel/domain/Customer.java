@@ -3,11 +3,7 @@ package youngcapital.hotel.JavaBackendHotel.domain;
 import java.sql.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,6 +18,9 @@ public class Customer {
 	private String lastName;
 	private String email;
 	private String address;
+
+	@OneToOne(mappedBy = "customer")
+	private Account account;
 	
 	@OneToMany(mappedBy = "customer")
 	@JsonIgnore
@@ -62,6 +61,14 @@ public class Customer {
 	}
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
+	}
+	@JsonIgnore
+	public Account getAccount() {
+		return account;
+	}
+	@JsonIgnore
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 	
