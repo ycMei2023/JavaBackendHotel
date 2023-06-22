@@ -34,7 +34,8 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          allow-no-subscriptions: true
+          enable-AzPSSession: true
+          allow-no-subscriptions: false
       - run: |
           az container restart --name yc2305hotelbackend --resource-group yc2305
    
