@@ -30,16 +30,34 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/javahotelbackend:latest
         
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       -
         name: Restart Container
-        env:
-          AZURE_CLIENT_ID: proefaccount@infocodefounders.onmicrosoft.com
-          AZURE_CLIENT_SECRET: w@lkom123!
+        #env:
+          #AZURE_CLIENT_ID: 95a0cfe0-fdd3-4521-a3be-2e8e5ea3d263
+          #AZURE_CLIENT_SECRET: 6an8Q~Iio2HWeJ.2AUNrZBfWhOI0E5dozVx3SaH1
           #AZURE_TENANT_ID: 98f16a07-0393-4374-8563-e33e258bcf6c
         run: |
-          az login -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET
           az container restart --name yc2305hotelbackend --resource-group yc2305
-          
+   
+  #deploy:
+    #runs-on: ubuntu-latest
+    #needs: build
+    #steps:
+      #- name: 'Deploy to Azure Container Instances'
+        #uses: 'azure/aci-deploy@v1'
+        #with:
+          #resource-group: yc2305
+          #dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+          #image: ${{ secrets.DOCKERHUB_USERNAME }}/javahotelbackend:latest
+          #registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          #registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          #registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          #name: aci-sampleapp
+          #location: 'west us'
       
           
       
