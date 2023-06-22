@@ -2,10 +2,7 @@ package youngcapital.hotel.JavaBackendHotel.domain;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -18,6 +15,22 @@ public class Account {
     private String password;
     private int points;
     private LocalDate birthDate;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private Customer customer;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+    public void insertCustomer(){
+        customer = new Customer();
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+
 
     public int getUserType() {
         return userType;
