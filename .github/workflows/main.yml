@@ -34,7 +34,7 @@ jobs:
         name: Restart Container
         env:
           AZURE_CLIENT_ID: 3707226f-e552-49c9-8475-7541be9199b9
-          AZURE_CLIENT_SECRET: d536f622-517c-4702-b4fc-55fda18f5736
+          AZURE_CLIENT_SECRET: J5N8Q~uk6IASnfOrh8~ct0.QV5gzALHO.U.rBaDe
           AZURE_TENANT_ID: 98f16a07-0393-4374-8563-e33e258bcf6c
         run: |
           az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
