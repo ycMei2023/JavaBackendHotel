@@ -29,21 +29,18 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/javahotelbackend:latest
+        
+      -
+        name: Restart Container
+        env:
+          AZURE_CLIENT_ID: 3707226f-e552-49c9-8475-7541be9199b9
+          AZURE_CLIENT_SECRET: d536f622-517c-4702-b4fc-55fda18f5736
+          AZURE_TENANT_ID: 98f16a07-0393-4374-8563-e33e258bcf6c
+        run: |
+          az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+          az container restart --name yc2305hotelbackend --resource-group yc2305
           
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    
-    steps:
-      - name: 'Deploy to Azure Container Instances'
-        uses: 'azure/aci-deploy@v1'
-        with:
-          container-name: 'yc2305hotelbackend'
-          resource-group: 'yc2305'
-          #dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-          image: ${{ secrets.DOCKERHUB_USERNAME }}/javahotelbackend:latest
-          #registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-          #registry-username: ${{ secrets.REGISTRY_USERNAME }}
-          #registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+      
+          
+      
     
