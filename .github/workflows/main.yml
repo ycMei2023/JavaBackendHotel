@@ -37,6 +37,7 @@ jobs:
           enable-AzPSSession: true
           allow-no-subscriptions: false
       - run: |
+          az account set --subscription 9f4e23b1-82f3-43b2-9ad7-910d38cffd75
           az container restart --name yc2305hotelbackend --resource-group yc2305
    
   #deploy:
