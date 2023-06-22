@@ -33,11 +33,11 @@ jobs:
       -
         name: Restart Container
         env:
-          AZURE_CLIENT_ID: 9c3f2b25-d814-477f-b802-358d30dcd87f
-          AZURE_CLIENT_SECRET: Loc8Q~UaiX0GzoJG9vtB3pE7WYIJmplJf_Ac.bi.
-          AZURE_TENANT_ID: 98f16a07-0393-4374-8563-e33e258bcf6c
+          AZURE_CLIENT_ID: proefaccount@infocodefounders.onmicrosoft.com
+          AZURE_CLIENT_SECRET: w@lkom123!
+          #AZURE_TENANT_ID: 98f16a07-0393-4374-8563-e33e258bcf6c
         run: |
-          az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+          az login -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET
           az container restart --name yc2305hotelbackend --resource-group yc2305
           
       
