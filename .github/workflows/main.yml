@@ -33,18 +33,9 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          client-id: 95a0cfe0-fdd3-4521-a3be-2e8e5ea3d263
-          client-secret: 6an8Q~Iio2HWeJ.2AUNrZBfWhOI0E5dozVx3SaH1
-          tenant-id: 98f16a07-0393-4374-8563-e33e258bcf6c
-          subscription-id: 9f4e23b1-82f3-43b2-9ad7-910d38cffd75
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
           allow-no-subscriptions: true
-      -
-        name: Restart Container
-        #env:
-          #AZURE_CLIENT_ID: 95a0cfe0-fdd3-4521-a3be-2e8e5ea3d263
-          #AZURE_CLIENT_SECRET: 6an8Q~Iio2HWeJ.2AUNrZBfWhOI0E5dozVx3SaH1
-          #AZURE_TENANT_ID: 98f16a07-0393-4374-8563-e33e258bcf6c
-        run: |
+      - run: |
           az container restart --name yc2305hotelbackend --resource-group yc2305
    
   #deploy:
