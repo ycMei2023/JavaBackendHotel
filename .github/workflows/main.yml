@@ -25,10 +25,14 @@ jobs:
         run:  echo 'MY_SECRET_DATABASE_URL=${{ secrets.MY_SECRET_DATABASE_URL }}' >> $GITHUB_ENV;
               echo 'MY_SECRET_USER=${{ secrets.MY_SECRET_USER }}' >> $GITHUB_ENV;
               echo 'MY_SECRET_PASSWORD=${{ secrets.MY_SECRET_PASSWORD }}' >> $GITHUB_ENV;
+              
       
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
+          MY_SECRET_DATABASE_URL: ${{ secrets.MY_SECRET_DATABASE_URL }}
+          MY_SECRET_USER: ${{ secrets.MY_SECRET_USER }}
+          MY_SECRET_PASSWORD: ${{ secrets.MY_SECRET_PASSWORD }}
           context: .
           file: ./Dockerfile
           push: true
